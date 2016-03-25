@@ -50,7 +50,7 @@ var Form = React.createClass({
     // find input
     var userName = React.findDOMNode(this.refs.login);
     // Add new user
-    if(userName.value.match(/\S/)) {
+    if(userName.value.match(/\S/) && this.props.logins.indexOf(userName.value) < 0) {
       this.props.addUser(userName.value);
     }
 
@@ -100,7 +100,7 @@ var Main = React.createClass({
     return (
       <div className="container">
         <div className="well row">
-          <Form addUser={this.addUser} />
+          <Form addUser={this.addUser} logins={this.state.logins} />
         </div>
         <div className="row">
           {cards}
