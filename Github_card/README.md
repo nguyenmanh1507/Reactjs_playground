@@ -1,5 +1,5 @@
-# Github Card
+# GitHub Card
 
-Get Github user info when submit Github username.
+Get GitHub user info when submit GitHub user name.
 
-* React.js ver 0.13.3
+* React.js version 0.13.3
