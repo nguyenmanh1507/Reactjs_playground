@@ -6,10 +6,9 @@ var Card = React.createClass({
     return {};
   },
   componentDidMount: function() {
-    var component = this;
     $.get('https://api.github.com/users/' + this.props.login, function(data) {
-      component.setState(data);
-    });
+      this.setState(data);
+    }.bind(this));
   },
   render: function() {
     var data = this.state;
