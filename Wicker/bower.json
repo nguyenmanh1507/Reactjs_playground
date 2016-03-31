@@ -1,0 +1,21 @@
+{
+  "name": "wicker",
+  "description": "A live collaboration wiki",
+  "main": "server.js",
+  "authors": [
+    "nguyenmanh1507 <nguyenmanh1507@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nguyenmanh1507/Reactjs_playground",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "skeleton": "^2.0.4"
+  }
+}
