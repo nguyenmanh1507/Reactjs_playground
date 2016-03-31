@@ -4,7 +4,8 @@
   "description": "A live collaboration wiki",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:js": "browserify ./src/app.js -t [ babelify ]  --outfile public/all.js",
+    "build": "watch \"npm run build:js\" ./src"
   },
   "repository": {
     "type": "git",
@@ -13,11 +14,14 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "babelify": "^7.2.0",
     "body-parser": "^1.15.0",
+    "browserify": "^13.0.0",
     "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "firebase": "^2.4.2"
+    "firebase": "^2.4.2",
+    "watch": "^0.17.1"
   }
 }
