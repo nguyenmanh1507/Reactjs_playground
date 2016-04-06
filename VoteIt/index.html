@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VoteIt</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <style>
+  .vote-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .vote-item {
+    background: #3E3E3E;
+    padding: 1rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .vote-item .text {
+    flex-grow: 1;
+  }
+
+  .vote-item .text h3 {
+    margin: 0;
+    font-size: 2.4rem;
+  }
+
+  .vote-item .text p {
+    font-style: italic;
+  }
+
+  .vote-score {
+    margin: 0 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    background: #6078EA;
+    border-radius: 8px;
+    padding: 5px 10px;
+  }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="text-center">VoteIt</h1>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <button class="btn btn-success btn-block">Add new</button>
+        <hr>
+        <form action="/">
+          <div class="form-group">
+            <input type="text" name="voteTitle" class="form-control" placeholder="Vote Title">
+          </div>
+          <div class="form-group">
+            <input type="text" name="voteDesc" class="form-control" placeholder="Vote Description">
+          </div>
+          <button class="btn btn-success btn-block" type="submit">Add</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Vote list -->
+  <div class="container">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <ul class="vote-list">
+          <li class="vote-item">
+            <div class="text">
+              <h3>VOTE TITLE</h3>
+              <p>VOTE DESCRIPTION</p>
+            </div>
+            <span class="vote-score">8</span>
+            <div class="action">
+              <button class="btn btn-success"><i class="fa fa-arrow-up"></i></button>
+              <button class="btn btn-success"><i class="fa fa-arrow-down"></i></button>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <!-- Vote item -->
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.8/react-dom.js"></script>
+</body>
+</html>
