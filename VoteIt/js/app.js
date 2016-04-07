@@ -1,17 +1,38 @@
 var Form = React.createClass({
+  addNew: function(e) {
+    e.preventDefault();
+    let newVoteItem = {
+      key: parseInt(this.props.feeds.length) + 1,
+      title: this.refs.voteTitle.value,
+      desc: this.refs.voteDesc.value,
+      point: 0
+    }
+
+    this.refs.form.reset();
+
+    this.props.addNew(newVoteItem);
+    this.props.toggleForm();
+  },
   render: function() {
+    let display = (this.props.display) ? 'block' : 'none',
+        style = {
+          display: display
+        },
+        btnClass = (this.props.display) ? 'btn btn-danger btn-block' : 'btn btn-success btn-block',
+        btnText = (this.props.display) ? 'Cancel' : 'Add new'
+    ;
     return (
       <div>
-        <button className="btn btn-success btn-block">Add new</button>
+        <button className={btnClass} onClick={this.props.toggleForm}>{btnText}</button>
         <hr />
-        <form>
+        <form style={style} ref="form">
           <div className="form-group">
-            <input type="text" name="voteTitle" className="form-control" placeholder="Vote Title" />
+            <input type="text" ref="voteTitle" className="form-control" placeholder="Vote Title" />
           </div>
           <div className="form-group">
-            <input type="text" name="voteDesc" className="form-control" placeholder="Vote Description" />
+            <input type="text" ref="voteDesc" className="form-control" placeholder="Vote Description" />
           </div>
-          <button className="btn btn-success btn-block" type="submit">Add</button>
+          <button className="btn btn-success btn-block" type="submit" onClick={this.addNew}>Add</button>
         </form>
       </div>
     );
@@ -23,10 +44,10 @@ var VoteItem = React.createClass({
     return (
       <li className="vote-item">
         <div className="text">
-          <h3>VOTE TITLE</h3>
-          <p>VOTE DESCRIPTION</p>
+          <h3>{this.props.title}</h3>
+          <p>{this.props.desc}</p>
         </div>
-        <div className="vote-score">8</div>
+        <div className="vote-score">{this.props.point}</div>
         <div className="action">
           <button className="btn btn-success"><i className="fa fa-arrow-up"></i></button>
           <button className="btn btn-success"><i className="fa fa-arrow-down"></i></button>
@@ -38,28 +59,84 @@ var VoteItem = React.createClass({
 
 var VoteList = React.createClass({
   render: function() {
+    let feeds = this.props.feeds.map(function(feed) {
+      return (
+        <VoteItem
+          key={feed.key}
+          title={feed.title}
+          desc={feed.desc}
+          point={feed.point}
+        />
+      );
+    });
     return (
       <ul className="vote-list">
-        <VoteItem />
+        {feeds}
       </ul>
     );
   }
 });
 
 var Main = React.createClass({
+  getInitialState: function() {
+    return {
+      display: false,
+      feeds: [
+        {
+          key: 1,
+          title: 'JavaScript is awesome',
+          desc: 'You can create cool app with JavaScript',
+          point: 9
+        },
+        {
+          key: 2,
+          title: 'Frontend Developer really cool',
+          desc: 'Every day has new thing to learn',
+          point: 4
+        },
+        {
+          key: 3,
+          title: 'JavaScript is awesome',
+          desc: 'You can create cool app with JavaScript',
+          point: 12
+        },
+        {
+          key: 4,
+          title: 'JavaScript is awesome',
+          desc: 'You can create cool app with JavaScript',
+          point: 7
+        }
+      ]
+    };
+  },
+  toggleForm: function() {
+    this.setState({
+      display: !this.state.display
+    });
+  },
+  addNew: function(newVoteItem) {
+    this.setState({
+      feeds: this.state.feeds.concat(newVoteItem)
+    });
+  },
   render: function() {
     return (
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-body">
 
-            <Form />
+            <Form
+              display={this.state.display}
+              toggleForm={this.toggleForm}
+              addNew={this.addNew}
+              feeds={this.state.feeds}
+            />
 
           </div>
         </div>
         <div className="panel panel-default">
           <div className="panel-body">
-            <VoteList />
+            <VoteList feeds={this.state.feeds} />
           </div>
         </div>
       </div>
