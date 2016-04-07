@@ -17,6 +17,10 @@
           align-items: center;
 }
 
+.vote-item:not(:last-of-type) {
+  margin-bottom: 20px;
+}
+
 .vote-item .text {
   flex-grow: 1;
 }
@@ -37,6 +41,10 @@
   background: #6078EA;
   border-radius: 8px;
   padding: 5px 10px;
+}
+
+.btn {
+  margin-right: 10px;
 }
 
 form {
