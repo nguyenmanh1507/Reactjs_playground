@@ -3,6 +3,7 @@ var Form = React.createClass({
     e.preventDefault();
     let newVoteItem = {
       key: parseInt(this.props.feeds.length) + 1,
+      id: parseInt(this.props.feeds.length) + 1,
       title: this.refs.voteTitle.value,
       desc: this.refs.voteDesc.value,
       point: 0
@@ -40,6 +41,24 @@ var Form = React.createClass({
 });
 
 var VoteItem = React.createClass({
+  voteUp: function() {
+    let newFeed = {
+      id: this.props.id,
+      title: this.props.title,
+      desc: this.props.desc,
+      point: this.props.point + 1
+    };
+    this.props.vote(newFeed);
+  },
+  voteDown: function() {
+    let newFeed = {
+      id: this.props.id,
+      title: this.props.title,
+      desc: this.props.desc,
+      point: this.props.point - 1
+    };
+    this.props.vote(newFeed);
+  },
   render: function() {
     return (
       <li className="vote-item">
@@ -49,8 +68,8 @@ var VoteItem = React.createClass({
         </div>
         <div className="vote-score">{this.props.point}</div>
         <div className="action">
-          <button className="btn btn-success"><i className="fa fa-arrow-up"></i></button>
-          <button className="btn btn-success"><i className="fa fa-arrow-down"></i></button>
+          <button className="btn btn-success" onClick={this.voteUp}><i className="fa fa-arrow-up"></i></button>
+          <button className="btn btn-success" onClick={this.voteDown}><i className="fa fa-arrow-down"></i></button>
         </div>
       </li>
     );
@@ -63,12 +82,14 @@ var VoteList = React.createClass({
       return (
         <VoteItem
           key={feed.key}
+          id={feed.id}
           title={feed.title}
           desc={feed.desc}
           point={feed.point}
+          vote={this.props.vote}
         />
       );
-    });
+    }.bind(this));
     return (
       <ul className="vote-list">
         {feeds}
@@ -84,26 +105,30 @@ var Main = React.createClass({
       feeds: [
         {
           key: 1,
+          id: 1,
           title: 'JavaScript is awesome',
           desc: 'You can create cool app with JavaScript',
           point: 9
         },
         {
           key: 2,
+          id: 2,
           title: 'Frontend Developer really cool',
           desc: 'Every day has new thing to learn',
           point: 4
         },
         {
           key: 3,
-          title: 'JavaScript is awesome',
-          desc: 'You can create cool app with JavaScript',
+          id: 3,
+          title: 'PostCSS is amazing',
+          desc: 'Help me a lot. I can write really cool things',
           point: 12
         },
         {
           key: 4,
-          title: 'JavaScript is awesome',
-          desc: 'You can create cool app with JavaScript',
+          id: 4,
+          title: 'Frontend tools change every day',
+          desc: 'Keep myself up-to-date is really hard',
           point: 7
         }
       ]
@@ -118,6 +143,21 @@ var Main = React.createClass({
     this.setState({
       feeds: this.state.feeds.concat(newVoteItem)
     });
+  },
+  vote: function(newFeed) {
+    let feeds = this.state.feeds;
+    let index = _.findIndex(feeds, function(feed) {
+      return feed.id === newFeed.id;
+    });
+
+    feeds[index] = _.merge(feeds[index], newFeed);
+
+    feeds = _.merge(feeds, feeds[index]);
+
+    this.setState({
+      feeds: feeds
+    });
+
   },
   render: function() {
     return (
@@ -136,7 +176,10 @@ var Main = React.createClass({
         </div>
         <div className="panel panel-default">
           <div className="panel-body">
-            <VoteList feeds={this.state.feeds} />
+            <VoteList
+              feeds={this.state.feeds}
+              vote={this.vote}
+            />
           </div>
         </div>
       </div>
