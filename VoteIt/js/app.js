@@ -99,39 +99,31 @@ var VoteList = React.createClass({
 });
 
 var Main = React.createClass({
+  loadData: function() {
+    var ref = new Firebase('https://ngmanhvoteit.firebaseio.com/feed');
+    ref.on('value', function(snap) {
+      var items = [];
+      var sorted = [];
+
+      snap.forEach(function(itemSnap) {
+        var item = itemSnap.val();
+        item.key = itemSnap.key();
+        items.push(item);
+      });
+
+      this.setState({
+        feeds: items
+      });
+
+    }.bind(this));
+  },
+  componentDidMount: function() {
+    this.loadData();
+  },
   getInitialState: function() {
     return {
       display: false,
-      feeds: [
-        {
-          key: 1,
-          id: 1,
-          title: 'JavaScript is awesome',
-          desc: 'You can create cool app with JavaScript',
-          point: 9
-        },
-        {
-          key: 2,
-          id: 2,
-          title: 'Frontend Developer really cool',
-          desc: 'Every day has new thing to learn',
-          point: 4
-        },
-        {
-          key: 3,
-          id: 3,
-          title: 'PostCSS is amazing',
-          desc: 'Help me a lot. I can write really cool things',
-          point: 12
-        },
-        {
-          key: 4,
-          id: 4,
-          title: 'Frontend tools change every day',
-          desc: 'Keep myself up-to-date is really hard',
-          point: 7
-        }
-      ]
+      feeds: []
     };
   },
   toggleForm: function() {
