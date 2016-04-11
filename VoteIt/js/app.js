@@ -5,8 +5,8 @@ var Form = React.createClass({
       key: parseInt(this.props.feeds.length) + 1,
       id: parseInt(this.props.feeds.length) + 1,
       title: this.refs.voteTitle.value,
-      desc: this.refs.voteDesc.value,
-      point: 0
+      description: this.refs.votedescription.value,
+      voteCount: 0
     }
 
     this.refs.form.reset();
@@ -31,7 +31,7 @@ var Form = React.createClass({
             <input type="text" ref="voteTitle" className="form-control" placeholder="Vote Title" />
           </div>
           <div className="form-group">
-            <input type="text" ref="voteDesc" className="form-control" placeholder="Vote Description" />
+            <input type="text" ref="votedescription" className="form-control" placeholder="Vote descriptionription" />
           </div>
           <button className="btn btn-success btn-block" type="submit" onClick={this.addNew}>Add</button>
         </form>
@@ -45,8 +45,8 @@ var VoteItem = React.createClass({
     let newFeed = {
       id: this.props.id,
       title: this.props.title,
-      desc: this.props.desc,
-      point: this.props.point + 1
+      description: this.props.description,
+      voteCount: this.props.voteCount + 1
     };
     this.props.vote(newFeed);
   },
@@ -54,8 +54,8 @@ var VoteItem = React.createClass({
     let newFeed = {
       id: this.props.id,
       title: this.props.title,
-      desc: this.props.desc,
-      point: this.props.point - 1
+      description: this.props.description,
+      voteCount: this.props.voteCount - 1
     };
     this.props.vote(newFeed);
   },
@@ -64,9 +64,9 @@ var VoteItem = React.createClass({
       <li className="vote-item">
         <div className="text">
           <h3>{this.props.title}</h3>
-          <p>{this.props.desc}</p>
+          <p>{this.props.description}</p>
         </div>
-        <div className="vote-score">{this.props.point}</div>
+        <div className="vote-score">{this.props.voteCount}</div>
         <div className="action">
           <button className="btn btn-success" onClick={this.voteUp}><i className="fa fa-arrow-up"></i></button>
           <button className="btn btn-success" onClick={this.voteDown}><i className="fa fa-arrow-down"></i></button>
@@ -84,8 +84,8 @@ var VoteList = React.createClass({
           key={feed.key}
           id={feed.id}
           title={feed.title}
-          desc={feed.desc}
-          point={feed.point}
+          description={feed.description}
+          voteCount={feed.voteCount}
           vote={this.props.vote}
         />
       );
