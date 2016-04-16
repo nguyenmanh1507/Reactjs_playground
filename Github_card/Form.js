@@ -1,4 +1,4 @@
-import Form from 'react';
+import React from 'react';
 
 class Form extends React.Component {
 
