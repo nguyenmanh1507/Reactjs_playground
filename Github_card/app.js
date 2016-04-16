@@ -1,6 +1,3 @@
-/** @jsx React.DOM */
-'use strict';
-
 var Card = React.createClass({
   getInitialState: function() {
     return {};
