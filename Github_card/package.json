@@ -1,0 +1,15 @@
+{
+  "name": "github_card",
+  "version": "1.0.0",
+  "description": "Github API",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "React",
+    "es2015"
+  ],
+  "author": "ngmanh",
+  "license": "MIT"
+}
