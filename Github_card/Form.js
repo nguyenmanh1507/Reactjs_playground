@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class Form extends React.Component {
 
@@ -7,10 +8,10 @@ class Form extends React.Component {
     e.preventDefault();
 
     // Find input
-    let userName = React.findDOMNode(this.refs.login);
+    let userName = ReactDOM.findDOMNode(this.refs.login);
 
     // Add new user
-    if (userName.value.match(/\S/) && this.props.login.indexOf(userName.value)) {
+    if (userName.value.match(/\S/) && this.props.logins.indexOf(userName.value)) {
       this.props.addUser(userName.value);
     }
 
@@ -20,7 +21,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <form action="/" onSubmit={this.getInfo} className="col-sm-6">
+      <form action="/" onSubmit={this.getInfo.bind(this)} className="col-sm-6">
 
         <div className="form-group">
           <label className="control-label">Enter GitHub username</label>
