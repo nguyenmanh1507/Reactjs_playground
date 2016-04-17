@@ -95,9 +95,11 @@ class Main extends React.Component {
   }
 
   render() {
+    var key = 0;
     let cards = this.state.logins.map(i => {
+      key++;
       return (
-        <Card login={i} />
+        <Card login={i} key={key} />
       );
     });
 
