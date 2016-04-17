@@ -77,12 +77,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Card from './Card';
-import From from './Form';
+import Form from './Form';
 
 class Main extends React.Component {
   constructor() {
     super();
-    this.logins = [];
+    this.state = {
+      logins: []
+    };
   }
 
   addUser(addToLogin) {
@@ -102,7 +104,7 @@ class Main extends React.Component {
     return (
       <div className="container">
         <div className="well row">
-          <Form addUser={this.addUser} logins={this.state.logins} />
+          <Form addUser={this.addUser.bind(this)} logins={this.state.logins} />
         </div>
         <div className="row">
           {cards}
