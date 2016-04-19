@@ -7,9 +7,15 @@ class Card extends React.Component {
   }
 
   componentDidMount() {
-    $.get('https://api.github.com/users/' + this.props.login, function(data) {
+    console.log('did mount');
+    $.get(`https://api.github.com/users/${this.props.login}?access_token=4fe569e02ea39143663da766a7fd0930d619f44f`, data => {
+      console.log(data);
       this.setState(data);
-    }.bind(this));
+      // console.log('success');
+    })
+    .fail(error => {
+      console.log(error.status, error.statusText);
+    });
   }
 
   render() {
