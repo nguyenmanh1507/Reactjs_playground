@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 
 class Form extends React.Component {
 
+  constructor() {
+    super();
+    this.getInfo = this.getInfo.bind(this);
+  }
+
   getInfo(e) {
     // Prevent form submit
     e.preventDefault();
@@ -21,7 +26,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <form action="/" onSubmit={this.getInfo.bind(this)} className="col-sm-6">
+      <form action="/" onSubmit={this.getInfo} className="col-sm-6">
 
         <div className="form-group">
           <label className="control-label">Enter GitHub username</label>
