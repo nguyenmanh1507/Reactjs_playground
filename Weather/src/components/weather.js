@@ -14,7 +14,7 @@ class Weather extends React.Component {
             </li>
             <li className="list-group-item">
               <span className="badge">&deg;C</span>
-              {main.temp_min} - {main.temp_max}
+              {main.temp}
             </li>
           </ul>
         </div>

@@ -11,8 +11,7 @@ class App extends React.Component {
       country: '',
       list: {
         main: {
-          temp_min: null,
-          temp_max: null
+          temp: null
         }
       }
     };
