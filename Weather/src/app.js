@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import Location from './components/location';
-import Weather from './components/weather';
+import WeatherList from './components/weatherList';
 
 class App extends React.Component {
   constructor() {
@@ -21,7 +21,7 @@ class App extends React.Component {
     return false;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     $.getJSON('http://localhost:3000/city')
       .done(data => {
         this.setState({
@@ -33,17 +33,6 @@ class App extends React.Component {
         console.log(error.statusText);
       })
     ;
-
-    $.getJSON('http://localhost:3000/list')
-      .done(data => {
-        this.setState({
-          list: data[0]
-        });
-      }).fail(error => {
-        console.log(error);
-      })
-    ;
-
   }
 
   render() {
@@ -57,12 +46,7 @@ class App extends React.Component {
         <Location city={this.state.city} country={this.state.country} />
 
         <div className="row">
-          <div className="col-md-4">
-            <Weather
-              key={this.state.list.dt}
-              list={this.state.list}
-            />
-          </div>
+          <WeatherList />
         </div>
       </div>
     );
