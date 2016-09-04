@@ -4,7 +4,7 @@
     {
       "id": "2032038123",
       "date": "MM-DD-YYY",
-      "type": "Plus|Minus",
+      "type": "earn|expense",
       "amount": 200000,
       "note": "MMJ Sponsor",
     }
