@@ -1,0 +1,12 @@
+{
+  "total": 1000000,
+  "data": [
+    {
+      "id": "2032038123",
+      "date": "MM-DD-YYY",
+      "type": "Plus|Minus",
+      "amount": 200000,
+      "note": "MMJ Sponsor",
+    }
+  ]
+}
