@@ -1,22 +1,31 @@
 import * as types from '../constants'
 
-const entries = (state = [], action) => {
+const initialState = {
+  total: 0,
+  entries: []
+}
+
+const entries = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_ENTRY:
-      return [
-        Object.assign({}, {
-          id: +Date.now()
-        }, action.data),
-        ...state
-      ]
+      return Object.assign({}, state, {
+        entries: [
+          Object.assign({}, {
+            id: +Date.now()
+          }, action.data),
+          ...state.entries
+        ]
+      })
 
     case types.SAVE_ENTRY:
-      return state.map(entry => {
-        if (entry.id === action.data.id) {
-          return Object.assign({}, entry, action.data)
-        }
+      return Object.assign({}, state, {
+        entries: state.entries.map(entry => {
+          if (entry.id === action.data.id) {
+            return Object.assign({}, entry, action.data)
+          }
 
-        return entry
+          return entry
+        })
       })
 
     case types.EDIT_ENTRY:
